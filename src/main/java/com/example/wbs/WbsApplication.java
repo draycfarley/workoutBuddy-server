@@ -18,7 +18,7 @@ public class WbsApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/workouts/all").allowedOrigins("https://workout-buddy-client2020.herokuapp.com");
+				registry.addMapping("/workouts/**").allowedOrigins("https://workout-buddy-client2020.herokuapp.com");
 			}
 		};
 	}
