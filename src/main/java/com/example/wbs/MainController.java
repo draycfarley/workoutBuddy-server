@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Controller // This means that this class is a Controller
 @RequestMapping(path="/workouts") // This means URL's start with /demo (after Application path)
