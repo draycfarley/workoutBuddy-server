@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import java.util.*;
 
 @Controller // This means that this class is a Controller
 @RequestMapping(path="/workouts") // This means URL's start with /demo (after Application path)
@@ -34,5 +34,22 @@ public class MainController {
   public @ResponseBody Iterable<ExerciseModel> getAllExercises() {
     // This returns a JSON or XML with the Exercises
     return exerciseRepository.findAll();
+  }
+
+  @GetMapping(path="/getByUserId")
+  public @ResponseBody Iterable<ExerciseModel> getExerciseByUsername(@RequestParam String userId) {
+    // This returns a JSON or XML with the Exercises
+    return exerciseRepository.findByUserId(userId);
+  }
+
+  @GetMapping(path="/getByWorkoutName")
+  public @ResponseBody Iterable<ExerciseModel> getExerciseByWorkoutName(@RequestParam String userId, @RequestParam String workoutName) {
+    // This returns a JSON or XML with the Exercises
+    List<ExerciseModel> exercises= exerciseRepository.findByUserId(userId);
+    List<ExerciseModel> filtered = new ArrayList<>();
+
+    for(int i=0; i<exercises.size(); i++) if(exercises.get(i).getWorkoutName().equals(workoutName)) filtered.add(exercises.get(i));
+
+    return filtered;
   }
 }

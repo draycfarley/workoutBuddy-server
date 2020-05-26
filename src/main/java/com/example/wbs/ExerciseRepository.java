@@ -1,5 +1,6 @@
 package com.example.wbs;
 
+import java.util.*;
 import org.springframework.data.repository.CrudRepository;
 import com.example.wbs.ExerciseModel;
 
@@ -7,5 +8,6 @@ import com.example.wbs.ExerciseModel;
 // CRUD refers Create, Read, Update, Delete
 
 public interface ExerciseRepository extends CrudRepository<ExerciseModel, Integer> {
-
+    List<ExerciseModel> findByUserId(String userId);
+    List<ExerciseModel> findByWorkoutName(String workoutName);
 }
