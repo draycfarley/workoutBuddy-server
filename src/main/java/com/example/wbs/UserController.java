@@ -19,7 +19,7 @@ public class UserController {
   BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   @PostMapping(path="/add") // Map ONLY POST Requests
-  public @ResponseBody String addNewUser (@RequestBody UserModel newUser) {
+  public @ResponseBody Integer addNewUser (@RequestBody UserModel newUser) {
     // @ResponseBody means the returned String is the response, not a view name
     // @RequestParam means it is a parameter from the GET or POST request
 
@@ -30,17 +30,17 @@ public class UserController {
     // n.setRest(rest);
 
     List<UserModel> users = userRepository.findByUsername(newUser.getUsername());
-    if(users.size()>0) return "taken";
+    if(users.size()>0) return -1;
     newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
-    userRepository.save(newUser);
-    return "saved";
+    UserModel saved= userRepository.save(newUser);
+    return saved.getId();
     
   }
 
   @PostMapping(path="/login")
-  public @ResponseBody String Login(@RequestBody UserModel userInfo) {
+  public @ResponseBody Integer Login(@RequestBody UserModel userInfo) {
     List<UserModel> users = userRepository.findByUsername(userInfo.getUsername());
-    if(users.size()==0 || passwordEncoder.matches(userInfo.getPassword(), users.get(0).getPassword())) return "failure";
-    return "success";
+    if(users.size()==0 || passwordEncoder.matches(userInfo.getPassword(), users.get(0).getPassword())) return -1;
+    return users.get(0).getId();
   }
 }

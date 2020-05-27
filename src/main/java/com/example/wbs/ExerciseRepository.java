@@ -9,5 +9,5 @@ import com.example.wbs.ExerciseModel;
 
 public interface ExerciseRepository extends CrudRepository<ExerciseModel, Integer> {
     List<ExerciseModel> findByUserId(String userId);
-    List<ExerciseModel> findByWorkoutName(String workoutName);
+    List<ExerciseModel> findByUserIdAndWorkoutName(Integer userId, String workoutName);
 }
