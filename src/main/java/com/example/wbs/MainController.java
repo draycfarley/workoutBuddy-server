@@ -28,6 +28,7 @@ public class MainController {
     // n.setRest(rest);
     Integer id=newExercise.getUserId();
     List<ExerciseModel> exercises= exerciseRepository.findByUserIdAndWorkoutName(id, newExercise.getWorkoutName());
+    System.out.println(exercises.size());
     if(exercises.size()>0) return "reused workoutName";
     exerciseRepository.save(newExercise);
     return "Saved";
