@@ -42,13 +42,13 @@ public class MainController {
     return exerciseRepository.findAll();
   }
 
-  @GetMapping(path="/getByUserId")
+  @PostMapping(path="/getByUserId")
   public @ResponseBody Iterable<ExerciseModel> getExerciseByUsername(@RequestBody Integer userId) {
     // This returns a JSON or XML with the Exercises
     return exerciseRepository.findByUserId(userId);
   }
 
-  @GetMapping(path="/getByWorkoutName")
+  @PostMapping(path="/getByWorkoutName")
   public @ResponseBody Iterable<ExerciseModel> getExerciseByWorkoutName(@RequestBody Integer userId, @RequestBody String workoutName) {
     // This returns a JSON or XML with the Exercises
     List<ExerciseModel> exercises= exerciseRepository.findByUserId(userId);
