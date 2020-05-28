@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.*;
 
+
 @Controller // This means that this class is a Controller
 @RequestMapping(path="/workouts") // This means URL's start with /demo (after Application path)
 public class MainController {
@@ -43,18 +44,18 @@ public class MainController {
   }
 
   @PostMapping(path="/getByUserId")
-  public @ResponseBody Iterable<ExerciseModel> getExerciseByUsername(@RequestBody Integer userId) {
+  public @ResponseBody Iterable<ExerciseModel> getExerciseByUsername(@RequestBody ExerciseModel req) {
     // This returns a JSON or XML with the Exercises
-    return exerciseRepository.findByUserId(userId);
+    return exerciseRepository.findByUserId(req.getUserId());
   }
 
   @PostMapping(path="/getByWorkoutName")
-  public @ResponseBody Iterable<ExerciseModel> getExerciseByWorkoutName(@RequestBody Integer userId, @RequestBody String workoutName) {
+  public @ResponseBody Iterable<ExerciseModel> getExerciseByWorkoutName(@RequestBody ExerciseModel req) {
     // This returns a JSON or XML with the Exercises
-    List<ExerciseModel> exercises= exerciseRepository.findByUserId(userId);
+    List<ExerciseModel> exercises= exerciseRepository.findByUserId(req.getUserId());
     List<ExerciseModel> filtered = new ArrayList<>();
 
-    for(int i=0; i<exercises.size(); i++) if(exercises.get(i).getWorkoutName().equals(workoutName)) filtered.add(exercises.get(i));
+    for(int i=0; i<exercises.size(); i++) if(exercises.get(i).getWorkoutName().equals(req.getWorkoutName() )) filtered.add(exercises.get(i));
 
     return filtered;
   }
