@@ -8,6 +8,6 @@ import com.example.wbs.ExerciseModel;
 // CRUD refers Create, Read, Update, Delete
 
 public interface ExerciseRepository extends CrudRepository<ExerciseModel, Integer> {
-    List<ExerciseModel> findByUserId(String userId);
+    List<ExerciseModel> findByUserId(Integer userId);
     List<ExerciseModel> findByUserIdAndWorkoutName(Integer userId, String workoutName);
 }
